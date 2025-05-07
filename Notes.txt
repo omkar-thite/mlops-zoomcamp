@@ -1,0 +1,85 @@
+MLOps Zoomcamp 1.4 - Course overview
+Notebooks are for expeiments and can easily lose historical changes. 
+Its better to log our experiments and metrics using experiment tracker.
+
+Its easy to overwrite the results in notebook and thus lose history of model.
+We can save models to model registry which stores models along with its metrics in experiment tracker.
+
+Due to non chronological execution of jupyter notebooks, its hard to keep track of order of excution. 
+You change something in one place and forget that other code needs to be excuted before that etc.
+Besst practices and tools to decompose out notebooks and make them easily exucutable : Here comes Machine Learning Pipelines.
+
+Breaking down notebook into multiple steps: In our notebook it can be
+1. Load and prepare data
+2. Vectorize the dictionary
+3. Train a model
+
+We can experiment with different models i.e. repeat step 3 without having to excute 1 and again and again. (if we don;t change anything related to them).
+
+We can organize our code into ML pipeline: 
+We can parmetrize the pipeline eg.
+1. Load and prepare data : train_data = Jan 23, Val_data=Feb23
+2. Vectorize the dictionary
+3. Train a model: model=Regressoion
+
+Once these things are in pipeline, we can easily re-execute them. 
+eg. $ python pipeline.py --train_data ... --val_data ... 
+
+Output of this pipeline is a trained model. 
+This trained model is then placed in a ML service.  
+Users can send requests to this service and service answers them using model.
+There are different types of serving a model (Module 4)
+
+After deployement we need to ensure that model is performing well for users. 
+Fotr this we add monitoring. 
+If model's performance drops, monitoring system can give us alert, the we can go and train model with new data or try different things.
+Other thing can be done is full automation: Upon alert, let the system run the pipeline, train new model on new data, deploy it to service and start monitoring the performance again. Fully autmatic with no humans in loop. 
+
+Every step in process is a piece of code which needs to be maintainable, cleaned, tested and documented. 
+There are best practices for maintaing software called DevOps. 
+Module 6: Best practices: Package pipeline and web services in docker, deploy it, practices to keep code in good condition and pleasant to work with.
+
+Developing ML systems cannnot be done in isolation, you have to collaborate with other people. 
+People need to work together such that people to own the code, want to solve the problem, be on same page and know what we are doing. (Module 7: Better understanding of problem we want to solve.)
+
+There are different maturity levels that our project can have where level 0 be no MLOps at all to Level 4 Everything automated. 
+Should we always go to highest maturity level or not?
+
+### MLOps Zoomcamp 1.5 - MLOps maturity model
+
+Reading: https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/mlops-maturity-model
+
+There are 5 MLops maturity levels defined: Level 0 (No MLOps) to Level 4 (Fully automation).
+
+Level 0 : No MLOps automation at all
+- Experimenting in Jupyter notebook without tracking, logging, no pipeline, no metadata about model, etc.
+- No automation, all code in sloppy jupyter notebook. This is often fine during POC phase of project.
+- Handing over this to engineers who try to reproduce results and ends up in disaster. 
+- high level of maturity is possible with jupyter notebooks. 
+
+Level 1 : DevOps but no MLOps
+- Some level of automation.
+- Experienced developers helping the data scientists, they use best DevOps practices.
+- eg. Releases will be automates so that you can deploy a web service with a  model in same way as you would deploy a web service in usual software engineering. 
+- Releases are automated.
+- Unit tests, Integration tests, CI/CD, operational metrics.
+- Systems are not ML aware, we just follow best practices from software engineering world which are good to follow but not related to ML at all.
+
+- Still we cant reproduce a model.
+- No experiment tracking, No reproducibility, DS seprated from Engineering team.
+
+You are in this state when you are done with POC and are preparing to go to production.
+If you have one or two models, its bit early to go next level, 
+At this maturity you can deploy the model and be fine. You don't actually always need to go to next maturity level.
+
+Level 2 : Automated Training
+ML training script, which trains model automatically, you don't need to go into jupyter notebook. 
+- you need to paramterize script to run scripts for different models.
+- execute this script to get the model.
+- you have experiment tracking
+- Model registry: you know which models are currently in production.
+- Trainging is automated, deployement is not necessarily automated but is smooth and simple.
+- Manual but low fricton deployement.
+- DS works with engineers and are often part of same team.
+
+At this level your organization already have multiple models in production, so it makes sense to invest in infrastructure to maintain and monitor pipelines.
