@@ -69,10 +69,11 @@ Level 1 : DevOps but no MLOps
 - No experiment tracking, No reproducibility, DS seprated from Engineering team.
 
 You are in this state when you are done with POC and are preparing to go to production.
-If you have one or two models, its bit early to go next level, 
+If you have one or two models, its bit early to go next level, stay as long as multiple use cases are proven.
 At this maturity you can deploy the model and be fine. You don't actually always need to go to next maturity level.
 
 Level 2 : Automated Training
+Come here when you have 2 or 3 or more use ML cases
 ML training script, which trains model automatically, you don't need to go into jupyter notebook. 
 - you need to paramterize script to run scripts for different models.
 - execute this script to get the model.
@@ -83,3 +84,22 @@ ML training script, which trains model automatically, you don't need to go into 
 - DS works with engineers and are often part of same team.
 
 At this level your organization already have multiple models in production, so it makes sense to invest in infrastructure to maintain and monitor pipelines.
+
+Level 3: Automated Deployement
+We don't need human to deploy a model or its low friction to deploy it. 2-3 use cases or one very important use case.
+- Very easy to deploy a model.
+- Say you have a place for hosting model called 'ML platform'. You can make just an API call to this and have the model delployed.
+- Now model is available on url returned from API which you as a data scientist can easily use. 
+- This can work as deployement phase training pipline: Prepare data -> Train Model -> Deploy Model (*here).
+- At this stage Ml hosting platform has capabilities of running A/B tests, eg. to find out which one of the two models is better.
+- Say you deployed model version v2 after v1 and you want to be sure than v2 performance is better than v1. Then ML platform will make some requests with old model v1 and some with new model v2 and then compare which is better.
+- Thus we will also include Model Monitoring here.
+
+Level 4: Full MLOps Automation
+Automatic Training -> Automatic Deployement -> Automatic Retraining  All in one place.
+
+
+At mature organizations where you have tens or hundreds of models in production, its not necessary that all the modelsa re at level 4 or all at some same level. 
+You dont really have to be at level 4. For some cases human decison is reuired whether to deploy model or not. 
+
+After course you will be able to build level 2 systems, almost at level 3.
