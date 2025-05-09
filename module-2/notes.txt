@@ -1,0 +1,52 @@
+ML experiment: proces sof bulding ML model
+Experiment run: Each trial of experiment (changing hparameters etc)
+Run artifact: Any file associated with an ML run.
+Experiment Metadata: Info about experiment
+
+Experiment tracking is keeping track of all relavant information from an ML expriment that can include: 
+Souce code, Environemt, Data, Model, Hyperps, ... etc. 
+
+3 reasons for experiment tracking: 
+Reproducibility, Organization (of resources), Optimization
+
+Tracking experiments in spreadsheets: 
+Why is not enough: 
+1. Error prone: entries are manual
+2. No standard format to store information.
+3. Visibility and collaboration. Hard do interpret results for non technical people or figure out what happend in an experiment.
+
+mlflow : open shource platform for ML lifecycle
+- simple pythoon packge canbe installed with pip. 
+It contains 4 main modules: 
+1. Tracking : focused on experiment tracking
+2. Models: special type of model
+3. Model Registry: to manage models in mlflow.
+4. Projects: Out of scope for this course. See doc for more.
+
+ML run is each trial in an ML experiment.
+
+Tracking module allows to organize experiments into runs and to keep track of: 
+Maunal Logging: 
+- hyper paramters or any other important parametrs that will have effect on metric of model
+eg path, preprocesing steps as parameters.
+- metrics eg. accuracy, f1 and so on.
+- metadata : anything related to experiment. eg. tags for developers or algortihms.
+you can filter using tags to compare runs.
+- artifacts : Any files related to experiment, eg graphs, visualizations, logs etc.
+- models : saved models after experiments (not during hyperp tuning, there we are concerned to save performance and not model itself).
+...
+etc.
+Experiment consists of mutliple runs associated with each other. 
+
+Automatic logging by mlflow:
+1. source code
+2. version of the code (git commit)
+3. start and end time
+4. Name of author
+
+Launch mlflow tracking UI locally using: 
+$ mlflow ui
+
+Launch mlflow server using
+$ mlflow server
+
